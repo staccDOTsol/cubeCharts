@@ -159,7 +159,7 @@ console.log('container'+i.toString())
                     else {
                     for (var top of tops){ 
 
-if (!Object.keys(options).includes(parseInt(top.marketId)-1)){
+if (options[(parseInt(top.marketId)-1)] == undefined){
                         options[parseInt(top.marketId)-1] =     {    rangeSelector: {
             buttons: [{
                 count: 1,
