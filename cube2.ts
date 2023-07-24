@@ -1,17 +1,22 @@
 import { Root } from 'protobufjs';
 import WebSocket from 'ws';
-
+let requestId = 0;
 import * as md from './market_data'; // Replace with your types
 const is = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]; // Replace with your market ID
 function doit(i: number) {
 
   const ws = new WebSocket(`wss://api.cube.exchange/md/book/${i}`);
-
+requestId++
 
   const root = new Root(); // Create a root object
   root.loadSync('./market_data.proto'); // Load your proto file
-  const MdMessage = root.lookupType('md.MdMessage'); // Look up your message type
-  
+  const MarketByPrice = root.lookupType('md.MarketByPrice'); // Look up your message type
+  const Heartbeat = root.lookupType('md.Heartbeat'); // Look up your message type
+  const heartbeat = Heartbeat.create({
+    heartbeat: BigInt(requestId),
+    timestamp: BigInt(new Date().getTime() * 1000)
+  });
+
   const config:  md.Config = {
     mbp: false, // Enable MBP feeds
     mbo: true, // Disable MBO feeds
@@ -19,13 +24,30 @@ function doit(i: number) {
     summary: true, // Enable 24h summary
     klines: [md.KlineInterval.S1, md.KlineInterval.M1] // Enable price klines for 1 minute and 5 minutes
   };
+  const mbp = MarketByPrice.create({
+   config,
+   heartbeat,
+   levels: [
+     {
+       price: BigInt(100),
+       quantity: BigInt(10)
+     },
+     {
+       price: BigInt(100),
+       quantity: BigInt(20)
+     }
+   ],
+   chunk: (requestId),
+   numChunks: 1
+  });
   
+
   
   
   ws.on('open', () => {
     console.log(`WebSocket connection to wss://api.cube.exchange/md/book/${i} established`);
   
-    const buffer = MdMessage.encode(MdMessage.create(config)).finish(); // Encode your message to a buffer
+    var buffer = MarketByPrice.encode(MarketByPrice.create(mbp)).finish(); // Encode your message to a buffer
   
     // Send the message to the server
     ws.send(buffer);
