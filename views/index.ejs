@@ -248,13 +248,12 @@ console.log('container'+i.toString())
                 let i = -1
                     for (var top of tops){ 
                         i++
-                        if (first){
+                        if (asks[top.marketId].length == 0){
                         bids[top.marketId]=([[Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.bidPrice)]])
                         asks[top.marketId]=([[Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.askPrice)]])
                         } 
                     } 
                     
-first = false 
 
                     for (var top of tops){ 
 
