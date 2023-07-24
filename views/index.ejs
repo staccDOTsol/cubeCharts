@@ -76,7 +76,9 @@ var first =true
             //chart = Highcharts.stockChart('container', options);
             $.getJSON('https://cube-charts-656379ba68ad.herokuapp.com/update?name=test', function(jsondata) {
                 let tops = jsondata.topOfBooks.tops 
+                let i = -1
                 for (var top of tops){
+                    i++
 console.log(tops)
                     try {
                         bids[top.marketId].push([Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.bidPrice)])
@@ -87,7 +89,7 @@ console.log(tops)
                         asks[top.marketId]=([[Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.askPrice)]])
 
 
-                        options[i] =     {    rangeSelector: {
+                        options[(i)] =     {    rangeSelector: {
             buttons: [{
                 count: 1,
                 type: 'minute',
