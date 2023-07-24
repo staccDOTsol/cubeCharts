@@ -159,8 +159,10 @@ console.log('container'+i.toString())
                             asks[parseInt(top.marketId)] = [Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.askPrice)]
                         }
                         else {
+                            if (bids[parseInt(top.marketId)].length == 1){
                             bids[parseInt(top.marketId)].shift()
                             asks[parseInt(top.marketId)].shift() 
+                            }
                         bids[parseInt(top.marketId)].push([Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.bidPrice)])
                         asks[parseInt(top.marketId)].push([Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.askPrice)])
                         }
