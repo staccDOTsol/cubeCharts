@@ -76,7 +76,7 @@ ws.on('open', function () {
     var heartbeat = setInterval(function () {
         var heartbeatMessage = Heartbeat.create({
             heartbeat: {
-                heartbeat: 1,
+                heartbeat: BigInt(1),
                 timestamp: BigInt(new Date().getTime() * 1000)
             }
         });
@@ -88,7 +88,7 @@ ws.on('open', function () {
         // Set the levels property to an array of AggMessage_Level instances
         // @ts-ignore
         heartbeat: {
-            heartbeat: 1,
+            heartbeat: BigInt(1),
             timestamp: BigInt(new Date().getTime() * 1000)
         },
         levels: [
@@ -101,7 +101,7 @@ ws.on('open', function () {
                 quantity: BigInt(20)
             }
         ],
-        chunk: 1,
+        chunk: BigInt(1),
         numChunks: 1
     });
     var buffer = AggMessage.encode(AggMessage.create(message)).finish(); // Encode your message to a buffer
@@ -115,7 +115,7 @@ ws.on('open', function () {
                     // Set the levels property to an array of AggMessage_Level instances
                     // @ts-ignore
                     heartbeat: {
-                        heartbeat: 1,
+                        heartbeat: BigInt(1),
                         timestamp: BigInt(new Date().getTime() * 1000)
                     },
                     levels: [
@@ -128,7 +128,7 @@ ws.on('open', function () {
                             quantity: BigInt(20)
                         }
                     ],
-                    chunk: 1,
+                    chunk: BigInt(1),
                     numChunks: 1
                 });
                 buffer = AggMessage.encode(AggMessage.create(message)).finish();
@@ -145,6 +145,10 @@ ws.on('message', function (data) {
         var message = AggMessage.create({
             // Set the levels property to an array of AggMessage_Level instances
             // @ts-ignore
+            heartbeat: {
+                heartbeat: BigInt(1),
+                timestamp: BigInt(new Date().getTime() * 1000)
+            },
             levels: [
                 {
                     price: BigInt(100),
@@ -155,7 +159,7 @@ ws.on('message', function (data) {
                     quantity: BigInt(20)
                 }
             ],
-            chunk: 1,
+            chunk: BigInt(1),
             numChunks: 1
         });
         var buffer = AggMessage.encode(AggMessage.create(message)).finish(); // Encode your message to a buffer
