@@ -154,10 +154,15 @@ console.log('container'+i.toString())
                
                     for (var top of tops){ 
                         console.log(top)
-                       
+                       try {
                         bids[parseInt(top.marketId)].push([Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.bidPrice)])
                         asks[parseInt(top.marketId)].push([Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.askPrice)])
-  chart[parseInt(top.marketId)].series[0].setData(bids[parseInt(top.marketId)]); // Update bid data
+                       } catch (err){
+                        bids[parseInt(top.marketId)]=([Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.bidPrice)])
+                        asks[parseInt(top.marketId)]=([Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.askPrice)])
+                     
+                       }
+                        chart[parseInt(top.marketId)].series[0].setData(bids[parseInt(top.marketId)]); // Update bid data
   chart[parseInt(top.marketId)].series[1].setData(asks[parseInt(top.marketId)]); 
                     }
                 console.log(asks)
