@@ -151,7 +151,10 @@ console.log('container'+i.toString())
                     for (var top of tops){ 
                         i++
                         console.log(top)
-                        
+                        if (bids[parseInt(top.marketId)]== undefined){
+                            bids[parseInt(top.marketId)] = []
+                            asks[parseInt(top.marketId)] = []
+                        }
                         bids[parseInt(top.marketId)].push([[Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.bidPrice)]])
                         asks[parseInt(top.marketId)].push([[Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.askPrice)]])
                     
