@@ -43,7 +43,7 @@ Cube Exchange Live Market Data <div id='roc'></div>
 
 <script>
 
-var chart = {};
+var chart = []
 
     var prices = [];
     var rois = [];
@@ -115,17 +115,17 @@ series: [
 ]
 };
 console.log('container'+i.toString())
-         chart[tops[i].marketId]=( Highcharts.stockChart('container'+i.toString(), options[i]))
+         chart[parseInt(tops[i].marketId)-1]=( Highcharts.stockChart('container'+i.toString(), options[i]))
 
-  chart[tops[i].marketId].series[0].setData(bids[tops[i].marketId]); // Update bid data
-  chart[tops[i].marketId].series[1].setData(asks[tops[i].marketId]); 
+  chart[parseInt(tops[i].marketId)-1].series[0].setData(bids[tops[i].marketId]); // Update bid data
+  chart[parseInt(tops[i].marketId)-1].series[1].setData(asks[tops[i].marketId]); 
                     }
                     else {
                         bids[tops[i].marketId].push([Math.floor(parseFloat(tops[i].transactTime) / 1000000), parseFloat(tops[i].bidPrice)])
                         asks[tops[i].marketId].push([Math.floor(parseFloat(tops[i].transactTime) / 1000000), parseFloat(tops[i].askPrice)])
                     }
-  chart[tops[i].marketId].series[0].setData(bids[tops[i].marketId]); // Update bid data
-  chart[tops[i].marketId].series[1].setData(asks[tops[i].marketId]); 
+  chart[parseInt(tops[i].marketId)-1].series[0].setData(bids[tops[i].marketId]); // Update bid data
+  chart[parseInt(tops[i].marketId)-1].series[1].setData(asks[tops[i].marketId]); 
                
                 }
                 console.log(asks)
