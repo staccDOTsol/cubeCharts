@@ -24,6 +24,12 @@ function updateChart(message:  any) {
         res.json(chart);
 }
 
+function noop() {}
+
+const ping = function() {
+  ws.ping(noop);
+}
+setInterval(ping, 30000);
 app.get('/update', (req: any, res: any) => {
 
     doPost(req, res)
