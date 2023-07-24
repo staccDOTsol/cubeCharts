@@ -145,20 +145,7 @@ console.log('container'+i.toString())
         console.log("ready!");
         var quoinexAsks = []
         var quoinexBids = []
-           //chart = Highcharts.stockChart('container', options);
-           $.getJSON('https://cube-charts-656379ba68ad.herokuapp.com/update?name=test', function(jsondata) {
-                let tops = jsondata.topOfBooks.tops 
-                let i = -1
-                    for (var top of tops){ 
-                        i++
-                        console.log(top)
-                console.log(parseInt(top.marketId))
-  chart[parseInt(top.marketId)].series[0].setData(bids[parseInt(top.marketId)]); // Update bid data
-  chart[parseInt(top.marketId)].series[1].setData(asks[parseInt(top.marketId)]); 
-                    }
-                
-                console.log(asks)
-            }); 
+           
         setInterval(function() {
             //chart = Highcharts.stockChart('container', options);
             $.getJSON('https://cube-charts-656379ba68ad.herokuapp.com/update?name=test', function(jsondata) {
