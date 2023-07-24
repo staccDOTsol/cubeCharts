@@ -77,7 +77,7 @@ var first =true
             $.getJSON('https://cube-charts-656379ba68ad.herokuapp.com/update?name=test', function(jsondata) {
                 let tops = jsondata.topOfBooks.tops 
                 for (var top of tops){
-
+console.log(tops)
                     try {
                         bids[top.marketId].push([Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.bidPrice)])
                         asks[top.marketId].push([Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.askPrice)])
