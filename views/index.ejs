@@ -153,7 +153,6 @@ var first =true
                         bids[tops[i].marketId].push([Math.floor(parseFloat(tops[i].transactTime) / 1000000), parseFloat(tops[i].bidPrice)])
                         asks[tops[i].marketId].push([Math.floor(parseFloat(tops[i].transactTime) / 1000000), parseFloat(tops[i].askPrice)])
                     }
-                    console.log(bids["1"].length)
                     if (bids[tops[i].marketId].length > 2 && first[i] == undefined){
                         first[i] = false   
                       
