@@ -1,0 +1,146 @@
+<head>
+   
+</head>
+<script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
+<!-- Resources -->
+<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+<script src="https://www.amcharts.com/lib/3/serial.js"></script>
+<script src="https://www.amcharts.com/lib/3/plugins/dataloader/dataloader.min.js"></script>
+<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+<style>
+    #chartdiv {
+        width: 100%;
+        height: 500px;
+    }
+</style>
+
+<script src="https://code.highcharts.com/stock/highstock.js"></script>
+<script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/stock/modules/export-data.js"></script>
+Cube Exchange Live Market Data <div id='roc'></div>
+<div id="container0" style="height: 500px; min-width: 310px"></div>
+<div id="container1" style="height: 500px; min-width: 310px"></div>
+<div id="container2" style="height: 500px; min-width: 310px"></div>
+<div id="container3" style="height: 500px; min-width: 310px"></div>
+<div id="container4" style="height: 500px; min-width: 310px"></div>
+<div id="container5" style="height: 500px; min-width: 310px"></div>
+<div id="container6" style="height: 500px; min-width: 310px"></div>
+<div id="container7" style="height: 500px; min-width: 310px"></div>
+<div id="container8" style="height: 500px; min-width: 310px"></div>
+<div id="container9" style="height: 500px; min-width: 310px"></div>
+<div id="container10" style="height: 500px; min-width: 310px"></div>
+<div id="container11" style="height: 500px; min-width: 310px"></div>
+<div id="container12" style="height: 500px; min-width: 310px"></div>
+<div id="container13" style="height: 500px; min-width: 310px"></div>
+<div id="container14" style="height: 500px; min-width: 310px"></div>
+<div id="container15" style="height: 500px; min-width: 310px"></div>
+<div id="container16" style="height: 500px; min-width: 310px"></div>
+<div id="container17" style="height: 500px; min-width: 310px"></div>
+
+<script>
+
+var chart = [];
+
+    var prices = [];
+    var rois = [];
+    var lasks = []; 
+        var asks = {}
+    var bids = {}
+let options = []
+
+
+        for (var i = 0 ; i< 17; i++){
+
+        }
+        var pos = []
+        var tar = []
+        var avail = []
+        var tar15 = []
+        var ntar15 = []
+        var tar3 = []
+        var ntar3 = []
+        var equity = []
+        var perc = []
+        var derivs = []
+        var first = true
+        var fperc;
+    $(document).ready(function() {
+        console.log("ready!");
+        var quoinexAsks = []
+        var quoinexBids = []
+        setInterval(function() {
+            //chart = Highcharts.stockChart('container', options);
+            $.getJSON('http://localhost:8080/update?name=test', function(jsondata) {
+                let tops = jsondata.topOfBooks.tops 
+                for (var i = 0; i < tops.length; i++){
+                    try {
+                            if (asks[tops[i].marketId] == undefined){
+                  
+                        bids[tops[i].marketId]=([[Math.floor(parseFloat(tops[i].transactTime) / 1000000), parseFloat(tops[i].bidPrice)]])
+                        asks[tops[i].marketId]=([[Math.floor(parseFloat(tops[i].transactTime) / 1000000), parseFloat(tops[i].bidPrice)]])
+
+
+                        options[i] = {
+chart: {
+type: 'line'
+},
+title: {
+text: 'Top of Books'
+},
+xAxis: {
+type: 'datetime',
+
+},
+yAxis: {
+title: {
+  text: 'Price'
+}
+},
+series: [
+{
+    type: 'line',
+  name: 'Bid',
+  data: bids[(i+1).toString()],
+  color: 'green'
+},
+{
+    type: 'line',
+  name: 'Ask',
+  data: asks[(i+1).toString()],
+  color: 'red'
+}
+]
+};
+console.log('container'+i.toString())
+         chart.push( Highcharts.stockChart('container'+i.toString(), options[i]))
+
+  chart[i].series[0].setData(bids[tops[i].marketId]); // Update bid data
+  chart[i].series[1].setData(asks[tops[i].marketId]); 
+                    }
+                    else {
+                        bids[tops[i].marketId].push([Math.floor(parseFloat(tops[i].transactTime) / 1000000), parseFloat(tops[i].bidPrice)])
+                        asks[tops[i].marketId].push([Math.floor(parseFloat(tops[i].transactTime) / 1000000), parseFloat(tops[i].bidPrice)])
+                    }
+  chart[i].series[0].setData(bids[tops[i].marketId]); // Update bid data
+  chart[i].series[1].setData(asks[tops[i].marketId]); 
+                } catch (err){
+                    console.log(err)
+                }
+                }
+                console.log(asks)
+            });
+        }, 2000);
+    });
+
+    var trade = [],
+        vol = [],
+        i = 0;
+
+    i = 0;
+
+    i = 0;
+</script>

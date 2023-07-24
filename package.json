@@ -1,0 +1,29 @@
+{
+  "author": {
+    "name": "Jarett Dunn",
+    "email": "jarettrsdunn@gmail.com"
+  },
+  "dependencies": {
+    "@types/ws": "^8.5.5",
+    "body-parser": "^1.18.3",
+    "ccxt": "^1.18.152",
+    "deribit-api": "*",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "google-spreadsheet": "*",
+    "protobufjs": "^7.2.4",
+    "request": "^2.88.0",
+    "stats-lite": "^2.2.0",
+    "websocket": "^1.0.34"
+  },
+  "scripts": {
+    "start": "node cube.js"
+  },
+  "deprecated": false,
+  "description": "Engine for Polo automation",
+  "engines": {
+    "node": ">=0.6"
+  },
+  "name": "deribit",
+  "version": "1.0.4"
+}
