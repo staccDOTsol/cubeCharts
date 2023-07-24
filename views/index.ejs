@@ -81,7 +81,7 @@ let options = []
                             if (asks[tops[i].marketId] == undefined){
                   
                         bids[tops[i].marketId]=([[Math.floor(parseFloat(tops[i].transactTime) / 1000000), parseFloat(tops[i].bidPrice)]])
-                        asks[tops[i].marketId]=([[Math.floor(parseFloat(tops[i].transactTime) / 1000000), parseFloat(tops[i].bidPrice)]])
+                        asks[tops[i].marketId]=([[Math.floor(parseFloat(tops[i].transactTime) / 1000000), parseFloat(tops[i].askPrice)]])
 
 
                         options[i] = {
@@ -123,7 +123,7 @@ console.log('container'+i.toString())
                     }
                     else {
                         bids[tops[i].marketId].push([Math.floor(parseFloat(tops[i].transactTime) / 1000000), parseFloat(tops[i].bidPrice)])
-                        asks[tops[i].marketId].push([Math.floor(parseFloat(tops[i].transactTime) / 1000000), parseFloat(tops[i].bidPrice)])
+                        asks[tops[i].marketId].push([Math.floor(parseFloat(tops[i].transactTime) / 1000000), parseFloat(tops[i].askPrice)])
                     }
   chart[i].series[0].setData(bids[tops[i].marketId]); // Update bid data
   chart[i].series[1].setData(asks[tops[i].marketId]); 
