@@ -79,7 +79,6 @@ var first =true
                 let i = -1
                 for (var top of tops){ 
                     i++
-console.log(tops)
                     try {
                         bids[top.marketId].push([Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.bidPrice)])
                         asks[top.marketId].push([Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.askPrice)])
