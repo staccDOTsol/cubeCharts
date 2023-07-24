@@ -160,7 +160,7 @@ console.log('container'+i.toString())
                         }
                         else {
                             bids[parseInt(top.marketId)].shift()
-                            asks[parseInt(top.marketId)].shift()
+                            asks[parseInt(top.marketId)].shift() 
                         bids[parseInt(top.marketId)].push([Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.bidPrice)])
                         asks[parseInt(top.marketId)].push([Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.askPrice)])
                         }
