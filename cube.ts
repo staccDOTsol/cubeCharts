@@ -36,7 +36,10 @@ var done = false
 while (done == false){
   try {
 const heartbeatMessage = Heartbeat.create({
-  // Set properties of the heartbeat object here
+  heartbeat: {
+    heartbeat: 1,
+    timestamp: BigInt(new Date().getTime())
+  }
 });
 const buffer2 = Heartbeat.encode(heartbeatMessage).finish();
 ws.send(buffer2);
@@ -50,8 +53,12 @@ ws.on('open', () => {
   console.log('WebSocket connection established');
   const heartbeat = setInterval(() => {
     const heartbeatMessage = Heartbeat.create({
-      // Set properties of the heartbeat object here
-    });
+
+      heartbeat: {
+        heartbeat: 1,
+        timestamp: BigInt(new Date().getTime())
+      }
+        });
     const buffer = Heartbeat.encode(heartbeatMessage).finish();
     ws.send(buffer);
   }, 5000)

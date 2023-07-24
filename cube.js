@@ -74,7 +74,10 @@ var done = false;
 while (done == false) {
     try {
         var heartbeatMessage = Heartbeat.create({
-        // Set properties of the heartbeat object here
+            heartbeat: {
+                heartbeat: 1,
+                timestamp: BigInt(new Date().getTime())
+            }
         });
         var buffer2 = Heartbeat.encode(heartbeatMessage).finish();
         ws.send(buffer2);
@@ -87,7 +90,10 @@ ws.on('open', function () {
     console.log('WebSocket connection established');
     var heartbeat = setInterval(function () {
         var heartbeatMessage = Heartbeat.create({
-        // Set properties of the heartbeat object here
+            heartbeat: {
+                heartbeat: 1,
+                timestamp: BigInt(new Date().getTime())
+            }
         });
         var buffer = Heartbeat.encode(heartbeatMessage).finish();
         ws.send(buffer);
