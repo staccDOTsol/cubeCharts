@@ -50,6 +50,12 @@ ws.on('open', () => {
   const message = AggMessage.create({
     // Set the levels property to an array of AggMessage_Level instances
     // @ts-ignore
+
+    heartbeat: {
+      heartbeat: 1,
+      timestamp: BigInt(new Date().getTime())
+    },
+    
     levels: [
       {
         price: BigInt(100),
