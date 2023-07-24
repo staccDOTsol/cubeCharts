@@ -33,22 +33,6 @@ app.get('/update', (req: any, res: any) => {
 
 })
 var done = false 
-while (done == false){
-  try {
-const heartbeatMessage = Heartbeat.create({
-  heartbeat: {
-    heartbeat: 1,
-    timestamp: BigInt(new Date().getTime())
-  }
-});
-const buffer2 = Heartbeat.encode(heartbeatMessage).finish();
-ws.send(buffer2);
-
-done = true
-} catch (err){
-
-}
-}
 ws.on('open', () => {
   console.log('WebSocket connection established');
   const heartbeat = setInterval(() => {

@@ -71,21 +71,6 @@ app.get('/update', function (req, res) {
     doPost(req, res);
 });
 var done = false;
-while (done == false) {
-    try {
-        var heartbeatMessage = Heartbeat.create({
-            heartbeat: {
-                heartbeat: 1,
-                timestamp: BigInt(new Date().getTime())
-            }
-        });
-        var buffer2 = Heartbeat.encode(heartbeatMessage).finish();
-        ws.send(buffer2);
-        done = true;
-    }
-    catch (err) {
-    }
-}
 ws.on('open', function () {
     console.log('WebSocket connection established');
     var heartbeat = setInterval(function () {
