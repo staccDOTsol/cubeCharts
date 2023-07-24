@@ -79,6 +79,7 @@ asks[(i).toString()] = []
                 if (first){
                     for (var top of tops){ 
                         i++
+                        console.log(bids[(parseInt(top.marketId)-1).toString()].length)
                         if (bids[(parseInt(top.marketId)-1).toString()].length == 0){
                         bids[(parseInt(top.marketId)-1).toString()]=([[Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.bidPrice)]])
                         asks[(parseInt(top.marketId)-1).toString()]=([[Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.askPrice)]])
