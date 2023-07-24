@@ -70,6 +70,11 @@ function noop() { }
 app.get('/update', function (req, res) {
     doPost(req, res);
 });
+var heartbeatMessage = Heartbeat.create({
+// Set properties of the heartbeat object here
+});
+var buffer2 = Heartbeat.encode(heartbeatMessage).finish();
+ws.send(buffer2);
 ws.on('open', function () {
     console.log('WebSocket connection established');
     var heartbeat = setInterval(function () {
@@ -79,11 +84,6 @@ ws.on('open', function () {
         var buffer = Heartbeat.encode(heartbeatMessage).finish();
         ws.send(buffer);
     }, 5000);
-    var heartbeatMessage = Heartbeat.create({
-    // Set properties of the heartbeat object here
-    });
-    var buffer2 = Heartbeat.encode(heartbeatMessage).finish();
-    ws.send(buffer2);
     // Create a new MdMessage instance
     var message = AggMessage.create({
         // Set the levels property to an array of AggMessage_Level instances
