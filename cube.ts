@@ -29,8 +29,7 @@ app.get('/update', (req: any, res: any) => {
 ws.on('open', () => {
   console.log('WebSocket connection established');
   let i = 0
-  while (true){
-    setTimeout(() => {
+    setInterval(() => {
   // Create a new MdMessage instance
   const message = AggMessage.create({
     // Set the levels property to an array of AggMessage_Level instances
@@ -54,9 +53,7 @@ ws.on('open', () => {
 
   // Send the message to the server
   ws.send(buffer);
-}, Math.random() * i * 100)
-i++
-}
+}, 1000)
 
 });
 
