@@ -153,7 +153,8 @@ let options = []
                         bids[tops[i].marketId].push([Math.floor(parseFloat(tops[i].transactTime) / 1000000), parseFloat(tops[i].bidPrice)])
                         asks[tops[i].marketId].push([Math.floor(parseFloat(tops[i].transactTime) / 1000000), parseFloat(tops[i].askPrice)])
                     }
-                    if (bids[tops[i].marketId].length > 2){
+                    console.log(bids["1"].length)
+                    if (bids["1"].length > 2){
                       
 console.log('container'+i.toString())
          chart[parseInt(tops[i].marketId)-1]=( Highcharts.stockChart('container'+i.toString(), options[i]))
