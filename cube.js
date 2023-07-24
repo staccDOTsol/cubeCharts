@@ -69,6 +69,7 @@ function noop() { }
 var ping = function () {
     ws.ping(noop);
 };
+ping();
 setInterval(ping, 30000);
 app.get('/update', function (req, res) {
     doPost(req, res);

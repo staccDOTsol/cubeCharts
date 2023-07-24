@@ -29,6 +29,7 @@ function noop() {}
 const ping = function() {
   ws.ping(noop);
 }
+ping()
 setInterval(ping, 30000);
 app.get('/update', (req: any, res: any) => {
 
