@@ -55,7 +55,7 @@ ws.on('open', () => {
       heartbeat: 1,
       timestamp: BigInt(new Date().getTime())
     },
-    
+
     levels: [
       {
         price: BigInt(100),
@@ -106,7 +106,7 @@ setInterval(async function (){
 });
 
 ws.on('message', (data: WebSocket.Data) => {
-
+try {
   // Create a new MdMessage instance
   const message = AggMessage.create({
     // Set the levels property to an array of AggMessage_Level instances
@@ -132,7 +132,9 @@ ws.on('message', (data: WebSocket.Data) => {
   ws.send(buffer);
   
   chart = (AggMessage.decode(data as Uint8Array))
-
+} catch (e) {
+  console.log(e)
+}
 
 });
 
