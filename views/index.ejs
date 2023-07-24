@@ -52,7 +52,7 @@ var chart = []
     var bids = {}
 let options = []
 
-
+var first =true 
         for (var i = 0 ; i< 17; i++){
 
         }
@@ -154,7 +154,8 @@ let options = []
                         asks[tops[i].marketId].push([Math.floor(parseFloat(tops[i].transactTime) / 1000000), parseFloat(tops[i].askPrice)])
                     }
                     console.log(bids["1"].length)
-                    if (bids["1"].length > 2){
+                    if (bids["1"].length > 2 && first){
+                        first = false 
                       
 console.log('container'+i.toString())
          chart[parseInt(tops[i].marketId)-1]=( Highcharts.stockChart('container'+i.toString(), options[i]))
