@@ -40,7 +40,7 @@ ws.on('open', () => {
 
       heartbeat: {
         heartbeat: 1,
-        timestamp: BigInt(new Date().getTime())
+        timestamp: BigInt(new Date().getTime() * 1000)
       }
         });
     const buffer = Heartbeat.encode(heartbeatMessage).finish();
@@ -53,7 +53,7 @@ ws.on('open', () => {
 
     heartbeat: {
       heartbeat: 1,
-      timestamp: BigInt(new Date().getTime())
+      timestamp: BigInt(new Date().getTime() * 1000)
     },
 
     levels: [
@@ -82,6 +82,11 @@ setInterval(async function (){
   const message = AggMessage.create({
     // Set the levels property to an array of AggMessage_Level instances
     // @ts-ignore
+    heartbeat: {
+      heartbeat: 1,
+      timestamp: BigInt(new Date().getTime() * 1000)
+    },
+
     levels: [
       {
         price: BigInt(100),
