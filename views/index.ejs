@@ -53,14 +53,13 @@ var chart = []
 let options = []
 
 var first =true 
-        for (var i = 0 ; i< 50; i++){
-bids[(i).toString()] = []
-asks[(i).toString()] = []
+        for (var i = 0 ; i< 17; i++){
+
         }
         var pos = []
         var tar = []
         var avail = []
-        var tar15 = [] 
+        var tar15 = []
         var ntar15 = []
         var tar3 = []
         var ntar3 = []
@@ -72,195 +71,19 @@ asks[(i).toString()] = []
         console.log("ready!");
         var quoinexAsks = []
         var quoinexBids = []
-           //chart = Highcharts.stockChart('container', options);
-           $.getJSON('https://cube-charts-656379ba68ad.herokuapp.com/update?name=test', function(jsondata) {
-                let tops = jsondata.topOfBooks.tops 
-                let i = -1
-                if (first){
-                    for (var top of tops){ 
-                        i++
-                        console.log(bids[(parseInt(top.marketId)-1).toString()].length)
-                        if (bids[(parseInt(top.marketId)-1).toString()].length == 0){
-                        bids[(parseInt(top.marketId)-1).toString()]=([[Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.bidPrice)]])
-                        asks[(parseInt(top.marketId)-1).toString()]=([[Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.askPrice)]])
-                        }
-
-if (options[(parseInt(top.marketId)-1).toString()] == undefined){
-                        options[parseInt(top.marketId)-1] =     {    rangeSelector: {
-            buttons: [{
-                count: 1,
-                type: 'minute',
-                text: '1m'
-            }, {
-                count: 5,
-                type: 'minute',
-                text: '5m'
-            }, {
-                count: 7,
-                type: 'minute',
-                text: '7m'
-            }, {
-                count: 14,
-                type: 'minute',
-                text: '14m'
-            }, {
-                count: 1,
-                type: 'hour',
-                text: '1h'
-            }, {
-                type: 'all',
-                text: 'All',
-            
-            }],
-
-            inputEnabled: false,
-            selected: 5
-        },
-
-
-        title: {
-            text: 'Price'
-        },
-
-
-        yAxis: [{
-            labels: {
-                align: 'right',
-                x: -3
-            },
-            title: {
-                text: 'Price'
-            },
-            height: '100%',
-            lineWidth: 2,
-            resize: {
-                enabled: true
-            }
-        }],
-
-        tooltip: {
-            split: true
-        },
-        series: [{
-                name: 'Bids',
-  data: bids[parseInt(top.marketId)-1],
-                color: '#FFFF00'
-            },{
-                name: 'Asks',
-  data: asks[parseInt(top.marketId)-1],
-                color: '#00FF00'
-            }
-        ]
-        }        
-                    
-                      
-console.log('container'+i.toString())
-         chart[parseInt(top.marketId)-1]=( Highcharts.stockChart('container'+(parseFloat(top.marketId)-1).toString(), options[parseFloat(top.marketId)-1]))
-
-                    }
-                }
-                }
-                    else {
-                    for (var top of tops){ 
-
-if (options[(parseInt(top.marketId)-1).toString()] == undefined){
-                        options[parseInt(top.marketId)-1] =     {    rangeSelector: {
-            buttons: [{
-                count: 1,
-                type: 'minute',
-                text: '1m'
-            }, {
-                count: 5,
-                type: 'minute',
-                text: '5m'
-            }, {
-                count: 7,
-                type: 'minute',
-                text: '7m'
-            }, {
-                count: 14,
-                type: 'minute',
-                text: '14m'
-            }, {
-                count: 1,
-                type: 'hour',
-                text: '1h'
-            }, {
-                type: 'all',
-                text: 'All',
-            
-            }],
-
-            inputEnabled: false,
-            selected: 5
-        },
-
-
-        title: {
-            text: 'Price'
-        },
-
-
-        yAxis: [{
-            labels: {
-                align: 'right',
-                x: -3
-            },
-            title: {
-                text: 'Price'
-            },
-            height: '100%',
-            lineWidth: 2,
-            resize: {
-                enabled: true
-            }
-        }],
-
-        tooltip: {
-            split: true
-        },
-        series: [{
-                name: 'Bids',
-  data: bids[parseInt(top.marketId)-1],
-                color: '#FFFF00'
-            },{
-                name: 'Asks',
-  data: asks[parseInt(top.marketId)-1],
-                color: '#00FF00'
-            }
-        ]
-        }        
-                    
-                      
-console.log('container'+i.toString())
-         chart[parseInt(top.marketId)-1]=( Highcharts.stockChart('container'+(parseFloat(top.marketId)-1).toString(), options[parseFloat(top.marketId)-1]))
-
-                    }
-  chart[parseInt(top.marketId)-1].series[0].setData(bids[(parseInt(top.marketId)-1).toString()]); // Update bid data
-  chart[parseInt(top.marketId)-1].series[1].setData(asks[(parseInt(top.marketId)-1).toString()]); 
-                    }
-                }
-                console.log(asks)
-            }); 
         setInterval(function() {
             //chart = Highcharts.stockChart('container', options);
             $.getJSON('https://cube-charts-656379ba68ad.herokuapp.com/update?name=test', function(jsondata) {
                 let tops = jsondata.topOfBooks.tops 
                 let i = -1
+                if (first){
                     for (var top of tops){ 
                         i++
-                        console.log(asks[(parseInt(top.marketId)-1).toString()].length)
-                        if (asks[(parseInt(top.marketId)-1).toString()].length == 0){
-                        bids[(parseInt(top.marketId)-1).toString()]=([[Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.bidPrice)]])
-                        asks[(parseInt(top.marketId)-1).toString()]=([[Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.askPrice)]])
-                        } 
-                    } 
-                    
+                        bids[top.marketId]=([[Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.bidPrice)]])
+                        asks[top.marketId]=([[Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.askPrice)]])
+                        
 
-                    for (var top of tops){ 
-
-                        if (options[(parseInt(top.marketId)-1).toString()] == undefined){
-                         options[parseInt(top.marketId)-1] =     {    rangeSelector: {
+                        options[parseInt(top.marketId)-1] =     {    rangeSelector: {
             buttons: [{
                 count: 1,
                 type: 'minute',
@@ -332,11 +155,14 @@ console.log('container'+i.toString())
          chart[parseInt(top.marketId)-1]=( Highcharts.stockChart('container'+(parseFloat(top.marketId)-1).toString(), options[parseFloat(top.marketId)-1]))
 
                     }
+                    first = false
                 }
+                    else {
                     for (var top of tops){ 
-  chart[parseInt(top.marketId)-1].series[0].setData(bids[(parseInt(top.marketId)-1).toString()]); // Update bid data
-  chart[parseInt(top.marketId)-1].series[1].setData(asks[(parseInt(top.marketId)-1).toString()]); 
+  chart[parseInt(top.marketId)-1].series[0].setData(bids[top.marketId]); // Update bid data
+  chart[parseInt(top.marketId)-1].series[1].setData(asks[top.marketId]); 
                     }
+                }
                 console.log(asks)
             }); 
         }, 2000);
