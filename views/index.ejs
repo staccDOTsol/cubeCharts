@@ -148,12 +148,13 @@ console.log('container'+i.toString())
                     for (var top of tops){ 
                         i++
                         console.log(top)
-                        bids[parseInt(top.marketId)-1].push([[Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.bidPrice)]])
-                        asks[parseInt(top.marketId)-1].push([[Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.askPrice)]])
+                        
+                        bids[parseInt(top.marketId)].push([[Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.bidPrice)]])
+                        asks[parseInt(top.marketId)].push([[Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.askPrice)]])
                     
-                console.log(parseInt(top.marketId)-1)
-  chart[parseInt(top.marketId)-1].series[0].setData(bids[parseInt(top.marketId)-1]); // Update bid data
-  chart[parseInt(top.marketId)-1].series[1].setData(asks[parseInt(top.marketId)-1]); 
+                console.log(parseInt(top.marketId))
+  chart[parseInt(top.marketId)].series[0].setData(bids[parseInt(top.marketId)]); // Update bid data
+  chart[parseInt(top.marketId)].series[1].setData(asks[parseInt(top.marketId)]); 
                     }
                 
                 console.log(asks)
@@ -166,8 +167,8 @@ console.log('container'+i.toString())
                
                     for (var top of tops){ 
                         console.log(top)
-  chart[parseInt(top.marketId)-1].series[0].setData(bids[parseInt(top.marketId)-1]); // Update bid data
-  chart[parseInt(top.marketId)-1].series[1].setData(asks[parseInt(top.marketId)-1]); 
+  chart[parseInt(top.marketId)].series[0].setData(bids[parseInt(top.marketId)]); // Update bid data
+  chart[parseInt(top.marketId)].series[1].setData(asks[parseInt(top.marketId)]); 
                     }
                 console.log(asks)
             }); 
