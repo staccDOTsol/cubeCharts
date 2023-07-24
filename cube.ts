@@ -135,8 +135,10 @@ try {
 
   // Send the message to the server
   ws.send(buffer);
-  
+  let ctemp = (AggMessage.decode(data as Uint8Array))
+  if (!Object.keys(ctemp).includes('heartbeat')) {
   chart = (AggMessage.decode(data as Uint8Array))
+  }
 } catch (e) {
   console.log(e)
 }

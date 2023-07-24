@@ -161,7 +161,10 @@ ws.on('message', function (data) {
         var buffer = AggMessage.encode(AggMessage.create(message)).finish(); // Encode your message to a buffer
         // Send the message to the server
         ws.send(buffer);
-        chart = (AggMessage.decode(data));
+        var ctemp = (AggMessage.decode(data));
+        if (!Object.keys(ctemp).includes('heartbeat')) {
+            chart = (AggMessage.decode(data));
+        }
     }
     catch (e) {
         console.log(e);
