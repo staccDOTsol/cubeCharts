@@ -32,12 +32,20 @@ app.get('/update', (req: any, res: any) => {
     doPost(req, res)
 
 })
-
+var done = false 
+while (done == false){
+  try {
 const heartbeatMessage = Heartbeat.create({
   // Set properties of the heartbeat object here
 });
 const buffer2 = Heartbeat.encode(heartbeatMessage).finish();
 ws.send(buffer2);
+
+done = true
+} catch (err){
+
+}
+}
 ws.on('open', () => {
   console.log('WebSocket connection established');
   const heartbeat = setInterval(() => {

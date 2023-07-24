@@ -70,11 +70,19 @@ function noop() { }
 app.get('/update', function (req, res) {
     doPost(req, res);
 });
-var heartbeatMessage = Heartbeat.create({
-// Set properties of the heartbeat object here
-});
-var buffer2 = Heartbeat.encode(heartbeatMessage).finish();
-ws.send(buffer2);
+var done = false;
+while (done == false) {
+    try {
+        var heartbeatMessage = Heartbeat.create({
+        // Set properties of the heartbeat object here
+        });
+        var buffer2 = Heartbeat.encode(heartbeatMessage).finish();
+        ws.send(buffer2);
+        done = true;
+    }
+    catch (err) {
+    }
+}
 ws.on('open', function () {
     console.log('WebSocket connection established');
     var heartbeat = setInterval(function () {
