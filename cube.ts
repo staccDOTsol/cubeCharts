@@ -13,7 +13,7 @@ const app = express();
 var chart: any 
 function updateChart(message:  any) {
     // @ts-ignore
-  const tops = message.topOfBooks.tops;
+  const tops = message
   // @ts-ignore
   return tops 
 }

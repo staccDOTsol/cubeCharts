@@ -51,7 +51,7 @@ app.listen(process.env.PORT || 3000, function () { });
 var chart;
 function updateChart(message) {
     // @ts-ignore
-    var tops = message.topOfBooks.tops;
+    var tops = message;
     // @ts-ignore
     return tops;
 }
