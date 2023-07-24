@@ -66,7 +66,7 @@ var first =true
         var equity = []
         var perc = []
         var derivs = []
-        var first = true
+        var first = []
         var fperc;
     $(document).ready(function() {
         console.log("ready!");
@@ -154,8 +154,8 @@ var first =true
                         asks[tops[i].marketId].push([Math.floor(parseFloat(tops[i].transactTime) / 1000000), parseFloat(tops[i].askPrice)])
                     }
                     console.log(bids["1"].length)
-                    if (bids[tops[i].maretId].length > 2 && first){
-                        first = false  
+                    if (bids[tops[i].maretId].length > 2 && first[i] == undefined){
+                        first[i] = false   
                       
 console.log('container'+i.toString())
          chart[parseInt(tops[i].marketId)-1]=( Highcharts.stockChart('container'+i.toString(), options[i]))
