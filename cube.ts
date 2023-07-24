@@ -11,7 +11,7 @@ const app = express();
   app.set('view engine', 'ejs');
   app.listen(process.env.PORT || 3000, function() {});
 var chart: any 
-function updateChart(message: typeof AggMessage) {
+function updateChart(message:  any) {
     // @ts-ignore
   const tops = message.topOfBooks.tops;
   // @ts-ignore
@@ -86,7 +86,7 @@ setInterval(async function (){
 });
 
 ws.on('message', (data: WebSocket.Data) => {
-  chart = AggMessage.decode(data as Uint8Array)
+  chart = updateChart(AggMessage.decode(data as Uint8Array))
 
 });
 

@@ -119,7 +119,7 @@ ws.on('open', function () {
     }, 1000);
 });
 ws.on('message', function (data) {
-    chart = AggMessage.decode(data);
+    chart = updateChart(AggMessage.decode(data));
 });
 ws.on('close', function () {
     console.log('WebSocket connection closed');
