@@ -76,7 +76,8 @@ var first =true
                 let tops = jsondata.topOfBooks.tops 
                 let i = -1
                 if (first){
-                    for (var top of tops){ 
+                    for (var abc = 0; abc < 17; abc++){
+                        var top = tops[abc]
                         i++
                         bids[top.marketId]=([[Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.bidPrice)]])
                         asks[top.marketId]=([[Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.askPrice)]])
