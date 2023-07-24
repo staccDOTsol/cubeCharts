@@ -151,7 +151,7 @@ console.log('container'+i.toString())
                         bids[parseInt(top.marketId)-1].push([[Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.bidPrice)]])
                         asks[parseInt(top.marketId)-1].push([[Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.askPrice)]])
                     
-                
+                console.log(parseInt(top.marketId)-1)
   chart[parseInt(top.marketId)-1].series[0].setData(bids[parseInt(top.marketId)-1]); // Update bid data
   chart[parseInt(top.marketId)-1].series[1].setData(asks[parseInt(top.marketId)-1]); 
                     }
