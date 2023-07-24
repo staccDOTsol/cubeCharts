@@ -116,7 +116,7 @@ series: [
 ]
 };
 console.log('container'+i.toString())
-         chart.push( Highcharts.stockChart('container'+i.toString(), options[i]))
+         chart[tops[i].marketId]=( Highcharts.stockChart('container'+i.toString(), options[i]))
 
   chart[tops[i].marketId].series[0].setData(bids[tops[i].marketId]); // Update bid data
   chart[tops[i].marketId].series[1].setData(asks[tops[i].marketId]); 
