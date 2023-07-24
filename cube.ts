@@ -7,6 +7,9 @@ const app = express();
   root.loadSync('./market_data.proto'); // Load your proto file
   const AggMessage = root.lookupType('md.AggMessage'); // Look up your message type
 
+
+  app.set('view engine', 'ejs');
+  app.listen(process.env.PORT || 3000, function() {});
 var chart: any 
 function updateChart(message: typeof AggMessage) {
     // @ts-ignore
@@ -96,6 +99,3 @@ app.get('/', (req: any, res: any) => {
     res.render('index');
 
 });
-
-app.set('view engine', 'ejs');
-app.listen(process.env.PORT || 3000, function() {});

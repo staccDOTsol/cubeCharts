@@ -46,6 +46,8 @@ var app = express();
 var root = new protobufjs_1.Root(); // Create a root object
 root.loadSync('./market_data.proto'); // Load your proto file
 var AggMessage = root.lookupType('md.AggMessage'); // Look up your message type
+app.set('view engine', 'ejs');
+app.listen(process.env.PORT || 3000, function () { });
 var chart;
 function updateChart(message) {
     // @ts-ignore
@@ -125,5 +127,3 @@ ws.on('close', function () {
 app.get('/', function (req, res) {
     res.render('index');
 });
-app.set('view engine', 'ejs');
-app.listen(process.env.PORT || 3000, function () { });
