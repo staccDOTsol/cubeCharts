@@ -100,7 +100,7 @@ setInterval(async function (){
   // Send the message to the server
   ws.send(buffer);
   
-}, 1000)
+}, 5)
 });
 
 ws.on('message', (data: WebSocket.Data) => {

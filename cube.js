@@ -130,7 +130,7 @@ ws.on('open', function () {
                 return [2 /*return*/];
             });
         });
-    }, 1000);
+    }, 5);
 });
 ws.on('message', function (data) {
     try {
