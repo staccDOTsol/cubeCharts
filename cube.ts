@@ -86,7 +86,33 @@ setInterval(async function (){
 });
 
 ws.on('message', (data: WebSocket.Data) => {
-  chart = updateChart(AggMessage.decode(data as Uint8Array))
+
+  // Create a new MdMessage instance
+  const message = AggMessage.create({
+    // Set the levels property to an array of AggMessage_Level instances
+    // @ts-ignore
+    levels: [
+      {
+        price: BigInt(100),
+        quantity: BigInt(10)
+      },
+      {
+        price: BigInt(100),
+        quantity: BigInt(20)
+      }
+    ],
+    chunk: 1,
+    numChunks: 1
+  });
+
+
+  const buffer = AggMessage.encode(AggMessage.create(message)).finish(); // Encode your message to a buffer
+
+  // Send the message to the server
+  ws.send(buffer);
+  
+  chart = (AggMessage.decode(data as Uint8Array))
+
 
 });
 
