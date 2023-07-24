@@ -143,6 +143,7 @@ ws.on('message', function (data) {
 });
 ws.on('close', function () {
     console.log('WebSocket connection closed');
+    ws = new ws_1.default('wss://api.cube.exchange/md/tops');
 });
 app.get('/', function (req, res) {
     res.render('index');

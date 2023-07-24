@@ -17,7 +17,7 @@ function updateChart(message:  any) {
   // @ts-ignore
   return tops 
 }
-  const ws = new WebSocket('wss://api.cube.exchange/md/tops');
+  let ws = new WebSocket('wss://api.cube.exchange/md/tops');
   async function doPost(req: any, res: any) {
 
         //console.log('name');
@@ -118,7 +118,7 @@ ws.on('message', (data: WebSocket.Data) => {
 
 ws.on('close', () => {
   console.log('WebSocket connection closed');
-
+  ws = new WebSocket('wss://api.cube.exchange/md/tops');
 });
 
 app.get('/', (req: any, res: any) => {
