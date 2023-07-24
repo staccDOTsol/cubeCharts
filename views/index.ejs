@@ -54,7 +54,8 @@ let options = []
 
 var first =true 
         for (var i = 0 ; i< 17; i++){
-
+bids[i] = []
+asks[i] = []
         }
         var pos = []
         var tar = []
@@ -78,8 +79,10 @@ var first =true
                 if (first){
                     for (var top of tops){ 
                         i++
+                        if (bids[top.marketId].length == 0){
                         bids[top.marketId]=([[Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.bidPrice)]])
                         asks[top.marketId]=([[Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.askPrice)]])
+                        }
 
 if (options[(parseInt(top.marketId)-1)] == undefined){
                         options[parseInt(top.marketId)-1] =     {    rangeSelector: {
