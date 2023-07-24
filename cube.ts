@@ -28,13 +28,22 @@ function noop() {}
 
 const ping = function() {
  
-  ws = new WebSocket('wss://api.cube.exchange/md/tops');
- if (ws.OPEN){
-  ws.ping(noop);
+try {  ws.ping(noop);
+ }catch(err){
+
  }
 }
 ping()
-setInterval(ping, 20);
+setInterval(async function(){
+  try {
+
+  ws = new WebSocket('wss://api.cube.exchange/md/tops');
+  
+  } catch (err){
+
+  }
+}, 1999)
+setInterval(ping, 2000);
 app.get('/update', (req: any, res: any) => {
 
     doPost(req, res)
