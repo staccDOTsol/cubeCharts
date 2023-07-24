@@ -66,7 +66,6 @@ var first =true
         var equity = []
         var perc = []
         var derivs = []
-        var first = []
         var fperc;
     $(document).ready(function() {
         console.log("ready!");
@@ -77,16 +76,13 @@ var first =true
             $.getJSON('https://cube-charts-656379ba68ad.herokuapp.com/update?name=test', function(jsondata) {
                 let tops = jsondata.topOfBooks.tops 
                 let i = -1
-                for (var top of tops){ 
-                    i++
-                    try {
-                        bids[top.marketId].push([Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.bidPrice)])
-                        asks[top.marketId].push([Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.askPrice)])
-                    } catch(err){
-                        console.log(top.marketId)
+                if (first){
+                    first = false
+                    for (var top of tops){ 
+                        i++
                         bids[top.marketId]=([[Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.bidPrice)]])
                         asks[top.marketId]=([[Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.askPrice)]])
-
+                        
 
                         options[parseInt(top.marketId)-1] =     {    rangeSelector: {
             buttons: [{
@@ -153,21 +149,17 @@ var first =true
                 color: '#00FF00'
             }
         ]
-                        }
-        
+        }        
                     
-                    }
-                    if (first[i] == undefined){
-                        first[i] = false   
                       
 console.log('container'+i.toString())
          chart[parseInt(top.marketId)-1]=( Highcharts.stockChart('container'+(parseFloat(top.marketId)-1).toString(), options[parseFloat(top.marketId)-1]))
 
                     }
+                }
                     else {
   chart[parseInt(top.marketId)-1].series[0].setData(bids[top.marketId]); // Update bid data
   chart[parseInt(top.marketId)-1].series[1].setData(asks[top.marketId]); 
-                    }
                 }
                 console.log(asks)
             });
