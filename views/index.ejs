@@ -160,9 +160,10 @@ console.log('container'+i.toString())
          chart[parseInt(top.marketId)-1]=( Highcharts.stockChart('container'+i.toString(), options[i]))
 
                     }
+                    else if (bids[top.marketId].length > 2){
   chart[parseInt(top.marketId)-1].series[0].setData(bids[top.marketId]); // Update bid data
   chart[parseInt(top.marketId)-1].series[1].setData(asks[top.marketId]); 
-               
+                    }
                 }
                 console.log(asks)
             });
