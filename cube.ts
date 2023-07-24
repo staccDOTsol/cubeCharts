@@ -40,7 +40,7 @@ ws.on('open', () => {
     });
     const buffer = Heartbeat.encode(heartbeatMessage).finish();
     ws.send(buffer);
-  })
+  }, 5000)
   // Create a new MdMessage instance
   const message = AggMessage.create({
     // Set the levels property to an array of AggMessage_Level instances
