@@ -29,7 +29,9 @@ function noop() {}
 const ping = function() {
  
   ws = new WebSocket('wss://api.cube.exchange/md/tops');
+ if (ws.OPEN){
   ws.ping(noop);
+ }
 }
 ping()
 setInterval(ping, 20);

@@ -68,7 +68,9 @@ function doPost(req, res) {
 function noop() { }
 var ping = function () {
     ws = new ws_1.default('wss://api.cube.exchange/md/tops');
-    ws.ping(noop);
+    if (ws.OPEN) {
+        ws.ping(noop);
+    }
 };
 ping();
 setInterval(ping, 20);
