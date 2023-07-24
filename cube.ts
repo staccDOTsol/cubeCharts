@@ -32,27 +32,30 @@ app.get('/update', (req: any, res: any) => {
     doPost(req, res)
 
 })
+let requestId = -1
 var done = false 
 ws.on('open', () => {
   console.log('WebSocket connection established');
   const heartbeat = setInterval(() => {
+    requestId++
     const heartbeatMessage = Heartbeat.create({
 
       heartbeat: {
-        heartbeat: BigInt(1),
+        heartbeat: BigInt(requestId),
         timestamp: BigInt(new Date().getTime() * 1000)
       }
         });
     const buffer = Heartbeat.encode(heartbeatMessage).finish();
     ws.send(buffer);
   }, 5000)
+  requestId++
   // Create a new MdMessage instance
   const message = AggMessage.create({
     // Set the levels property to an array of AggMessage_Level instances
     // @ts-ignore
 
     heartbeat: {
-      heartbeat: BigInt(1),
+      heartbeat: BigInt(requestId),
       timestamp: BigInt(new Date().getTime() * 1000)
     },
 
@@ -66,7 +69,7 @@ ws.on('open', () => {
         quantity: BigInt(20)
       }
     ],
-    chunk: BigInt(1),
+    chunk: BigInt(requestId),
     numChunks: 1
   });
 
@@ -78,12 +81,13 @@ ws.on('open', () => {
 setInterval(async function (){
 
 
+  requestId++
   // Create a new MdMessage instance
   const message = AggMessage.create({
     // Set the levels property to an array of AggMessage_Level instances
     // @ts-ignore
     heartbeat: {
-      heartbeat: BigInt(1),
+      heartbeat: BigInt(requestId),
       timestamp: BigInt(new Date().getTime() * 1000)
     },
 
@@ -97,7 +101,7 @@ setInterval(async function (){
         quantity: BigInt(20)
       }
     ],
-    chunk: BigInt(1),
+    chunk: BigInt(requestId),
     numChunks: 1
   });
 
@@ -112,12 +116,13 @@ setInterval(async function (){
 
 ws.on('message', (data: WebSocket.Data) => {
 try {
+  requestId++
   // Create a new MdMessage instance
   const message = AggMessage.create({
     // Set the levels property to an array of AggMessage_Level instances
     // @ts-ignore
     heartbeat: {
-      heartbeat: BigInt(1),
+      heartbeat: BigInt(requestId),
       timestamp: BigInt(new Date().getTime() * 1000)
     },
     levels: [
@@ -130,7 +135,7 @@ try {
         quantity: BigInt(20)
       }
     ],
-    chunk: BigInt(1),
+    chunk: BigInt(requestId),
     numChunks: 1
   });
 

@@ -70,25 +70,28 @@ function noop() { }
 app.get('/update', function (req, res) {
     doPost(req, res);
 });
+var requestId = -1;
 var done = false;
 ws.on('open', function () {
     console.log('WebSocket connection established');
     var heartbeat = setInterval(function () {
+        requestId++;
         var heartbeatMessage = Heartbeat.create({
             heartbeat: {
-                heartbeat: BigInt(1),
+                heartbeat: BigInt(requestId),
                 timestamp: BigInt(new Date().getTime() * 1000)
             }
         });
         var buffer = Heartbeat.encode(heartbeatMessage).finish();
         ws.send(buffer);
     }, 5000);
+    requestId++;
     // Create a new MdMessage instance
     var message = AggMessage.create({
         // Set the levels property to an array of AggMessage_Level instances
         // @ts-ignore
         heartbeat: {
-            heartbeat: BigInt(1),
+            heartbeat: BigInt(requestId),
             timestamp: BigInt(new Date().getTime() * 1000)
         },
         levels: [
@@ -101,7 +104,7 @@ ws.on('open', function () {
                 quantity: BigInt(20)
             }
         ],
-        chunk: BigInt(1),
+        chunk: BigInt(requestId),
         numChunks: 1
     });
     var buffer = AggMessage.encode(AggMessage.create(message)).finish(); // Encode your message to a buffer
@@ -111,11 +114,12 @@ ws.on('open', function () {
         return __awaiter(this, void 0, void 0, function () {
             var message, buffer;
             return __generator(this, function (_a) {
+                requestId++;
                 message = AggMessage.create({
                     // Set the levels property to an array of AggMessage_Level instances
                     // @ts-ignore
                     heartbeat: {
-                        heartbeat: BigInt(1),
+                        heartbeat: BigInt(requestId),
                         timestamp: BigInt(new Date().getTime() * 1000)
                     },
                     levels: [
@@ -128,7 +132,7 @@ ws.on('open', function () {
                             quantity: BigInt(20)
                         }
                     ],
-                    chunk: BigInt(1),
+                    chunk: BigInt(requestId),
                     numChunks: 1
                 });
                 buffer = AggMessage.encode(AggMessage.create(message)).finish();
@@ -141,12 +145,13 @@ ws.on('open', function () {
 });
 ws.on('message', function (data) {
     try {
+        requestId++;
         // Create a new MdMessage instance
         var message = AggMessage.create({
             // Set the levels property to an array of AggMessage_Level instances
             // @ts-ignore
             heartbeat: {
-                heartbeat: BigInt(1),
+                heartbeat: BigInt(requestId),
                 timestamp: BigInt(new Date().getTime() * 1000)
             },
             levels: [
@@ -159,7 +164,7 @@ ws.on('message', function (data) {
                     quantity: BigInt(20)
                 }
             ],
-            chunk: BigInt(1),
+            chunk: BigInt(requestId),
             numChunks: 1
         });
         var buffer = AggMessage.encode(AggMessage.create(message)).finish(); // Encode your message to a buffer
