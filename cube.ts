@@ -36,18 +36,7 @@ let requestId = -1
 var done = false 
 ws.on('open', () => {
   console.log('WebSocket connection established');
-  const heartbeat = setInterval(() => {
-    requestId++
-    const heartbeatMessage = Heartbeat.create({
-
-      heartbeat: {
-        heartbeat: BigInt(requestId),
-        timestamp: BigInt(new Date().getTime() * 1000)
-      }
-        });
-    const buffer = Heartbeat.encode(heartbeatMessage).finish();
-    ws.send(buffer);
-  }, 5000)
+  
   requestId++
   // Create a new MdMessage instance
   const message = AggMessage.create({
