@@ -52,11 +52,8 @@ ws.on('open', () => {
 
   // Send the message to the server
   ws.send(buffer);
-  
-});
+setInterval(async function (){
 
-ws.on('message', (data: WebSocket.Data) => {
-  chart = AggMessage.decode(data as Uint8Array)
 
   // Create a new MdMessage instance
   const message = AggMessage.create({
@@ -81,6 +78,13 @@ ws.on('message', (data: WebSocket.Data) => {
 
   // Send the message to the server
   ws.send(buffer);
+  
+}, 1000)
+});
+
+ws.on('message', (data: WebSocket.Data) => {
+  chart = AggMessage.decode(data as Uint8Array)
+
 });
 
 ws.on('close', () => {

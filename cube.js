@@ -88,29 +88,36 @@ ws.on('open', function () {
     var buffer = AggMessage.encode(AggMessage.create(message)).finish(); // Encode your message to a buffer
     // Send the message to the server
     ws.send(buffer);
+    setInterval(function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var message, buffer;
+            return __generator(this, function (_a) {
+                message = AggMessage.create({
+                    // Set the levels property to an array of AggMessage_Level instances
+                    // @ts-ignore
+                    levels: [
+                        {
+                            price: BigInt(100),
+                            quantity: BigInt(10)
+                        },
+                        {
+                            price: BigInt(100),
+                            quantity: BigInt(20)
+                        }
+                    ],
+                    chunk: 1,
+                    numChunks: 1
+                });
+                buffer = AggMessage.encode(AggMessage.create(message)).finish();
+                // Send the message to the server
+                ws.send(buffer);
+                return [2 /*return*/];
+            });
+        });
+    }, 1000);
 });
 ws.on('message', function (data) {
     chart = AggMessage.decode(data);
-    // Create a new MdMessage instance
-    var message = AggMessage.create({
-        // Set the levels property to an array of AggMessage_Level instances
-        // @ts-ignore
-        levels: [
-            {
-                price: BigInt(100),
-                quantity: BigInt(10)
-            },
-            {
-                price: BigInt(100),
-                quantity: BigInt(20)
-            }
-        ],
-        chunk: 1,
-        numChunks: 1
-    });
-    var buffer = AggMessage.encode(AggMessage.create(message)).finish(); // Encode your message to a buffer
-    // Send the message to the server
-    ws.send(buffer);
 });
 ws.on('close', function () {
     console.log('WebSocket connection closed');
