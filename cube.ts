@@ -7,6 +7,7 @@ const app = express();
   root.loadSync('./market_data.proto'); // Load your proto file
   const AggMessage = root.lookupType('md.AggMessage'); // Look up your message type
 
+  const Heartbeat = root.lookupType('md.Heartbeat'); // Look up your message type
 
   app.set('view engine', 'ejs');
   app.listen(process.env.PORT || 3000, function() {});
@@ -33,7 +34,13 @@ app.get('/update', (req: any, res: any) => {
 })
 ws.on('open', () => {
   console.log('WebSocket connection established');
-  
+  const heartbeat = setInterval(() => {
+    const heartbeatMessage = Heartbeat.create({
+      // Set properties of the heartbeat object here
+    });
+    const buffer = Heartbeat.encode(heartbeatMessage).finish();
+    ws.send(buffer);
+  })
   // Create a new MdMessage instance
   const message = AggMessage.create({
     // Set the levels property to an array of AggMessage_Level instances

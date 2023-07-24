@@ -46,6 +46,7 @@ var app = express();
 var root = new protobufjs_1.Root(); // Create a root object
 root.loadSync('./market_data.proto'); // Load your proto file
 var AggMessage = root.lookupType('md.AggMessage'); // Look up your message type
+var Heartbeat = root.lookupType('md.Heartbeat'); // Look up your message type
 app.set('view engine', 'ejs');
 app.listen(process.env.PORT || 3000, function () { });
 var chart;
@@ -71,6 +72,13 @@ app.get('/update', function (req, res) {
 });
 ws.on('open', function () {
     console.log('WebSocket connection established');
+    var heartbeat = setInterval(function () {
+        var heartbeatMessage = Heartbeat.create({
+        // Set properties of the heartbeat object here
+        });
+        var buffer = Heartbeat.encode(heartbeatMessage).finish();
+        ws.send(buffer);
+    });
     // Create a new MdMessage instance
     var message = AggMessage.create({
         // Set the levels property to an array of AggMessage_Level instances
