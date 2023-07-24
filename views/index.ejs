@@ -154,7 +154,7 @@ var first =true
                         asks[tops[i].marketId].push([Math.floor(parseFloat(tops[i].transactTime) / 1000000), parseFloat(tops[i].askPrice)])
                     }
                     console.log(bids["1"].length)
-                    if (bids["1"].length > 2 && first){
+                    if (bids[tops[i].maretId].length > 2 && first){
                         first = false  
                       
 console.log('container'+i.toString())
