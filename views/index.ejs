@@ -85,7 +85,7 @@ asks[(i).toString()] = []
                         asks[(parseInt(top.marketId)-1).toString()]=([[Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.askPrice)]])
                         }
 
-if (options[(parseInt(top.marketId)-1)] == undefined){
+if (options[(parseInt(top.marketId)-1).toString()] == undefined){
                         options[parseInt(top.marketId)-1] =     {    rangeSelector: {
             buttons: [{
                 count: 1,
@@ -163,7 +163,7 @@ console.log('container'+i.toString())
                     else {
                     for (var top of tops){ 
 
-if (options[(parseInt(top.marketId)-1)] == undefined){
+if (options[(parseInt(top.marketId)-1).toString()] == undefined){
                         options[parseInt(top.marketId)-1] =     {    rangeSelector: {
             buttons: [{
                 count: 1,
@@ -259,7 +259,7 @@ console.log('container'+i.toString())
 
                     for (var top of tops){ 
 
-                        if (options[(parseInt(top.marketId)-1)] == undefined){
+                        if (options[(parseInt(top.marketId)-1).toString()] == undefined){
                          options[parseInt(top.marketId)-1] =     {    rangeSelector: {
             buttons: [{
                 count: 1,
