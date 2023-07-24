@@ -83,37 +83,71 @@ let options = []
                         asks[tops[i].marketId]=([[Math.floor(parseFloat(tops[i].transactTime) / 1000000), parseFloat(tops[i].askPrice)]])
 
 
-                        options[i] = {
-chart: {
-type: 'line'
-},
-title: {
-text: 'Top of Books'
-},
-xAxis: {
-type: 'datetime',
+                        options[i] =     {    rangeSelector: {
+            buttons: [{
+                count: 1,
+                type: 'minute',
+                text: '1m'
+            }, {
+                count: 5,
+                type: 'minute',
+                text: '5m'
+            }, {
+                count: 7,
+                type: 'minute',
+                text: '7m'
+            }, {
+                count: 14,
+                type: 'minute',
+                text: '14m'
+            }, {
+                count: 1,
+                type: 'hour',
+                text: '1h'
+            }, {
+                type: 'all',
+                text: 'All'
+            }],
+            inputEnabled: false,
+            selected: 0
+        },
 
-},
-yAxis: {
-title: {
-  text: 'Price'
-}
-},
-series: [
-{
-    type: 'line',
-  name: 'Bid',
+
+        title: {
+            text: 'BTC Price'
+        },
+
+
+        yAxis: [{
+            labels: {
+                align: 'right',
+                x: -3
+            },
+            title: {
+                text: 'Price'
+            },
+            height: '100%',
+            lineWidth: 2,
+            resize: {
+                enabled: true
+            }
+        }],
+
+        tooltip: {
+            split: true
+        },
+        series: [{
+                name: 'Bids',
   data: bids[(i+1).toString()],
-  color: 'green'
-},
-{
-    type: 'line',
-  name: 'Ask',
+                color: '#FFFF00'
+            },{
+                name: 'Asks',
   data: asks[(i+1).toString()],
-  color: 'red'
-}
-]
-};
+                color: '#00FF00'
+            }
+        ]
+                        }
+        
 console.log('container'+i.toString())
          chart[parseInt(tops[i].marketId)-1]=( Highcharts.stockChart('container'+i.toString(), options[i]))
 
