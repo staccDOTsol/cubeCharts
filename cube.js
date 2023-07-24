@@ -91,9 +91,6 @@ ws.on('open', function () {
 });
 ws.on('message', function (data) {
     chart = AggMessage.decode(data);
-});
-ws.on('close', function () {
-    console.log('WebSocket connection closed');
     // Create a new MdMessage instance
     var message = AggMessage.create({
         // Set the levels property to an array of AggMessage_Level instances
@@ -114,6 +111,9 @@ ws.on('close', function () {
     var buffer = AggMessage.encode(AggMessage.create(message)).finish(); // Encode your message to a buffer
     // Send the message to the server
     ws.send(buffer);
+});
+ws.on('close', function () {
+    console.log('WebSocket connection closed');
 });
 app.get('/', function (req, res) {
     res.render('index');

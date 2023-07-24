@@ -57,10 +57,6 @@ ws.on('open', () => {
 
 ws.on('message', (data: WebSocket.Data) => {
   chart = AggMessage.decode(data as Uint8Array)
-});
-
-ws.on('close', () => {
-  console.log('WebSocket connection closed');
 
   // Create a new MdMessage instance
   const message = AggMessage.create({
@@ -85,6 +81,11 @@ ws.on('close', () => {
 
   // Send the message to the server
   ws.send(buffer);
+});
+
+ws.on('close', () => {
+  console.log('WebSocket connection closed');
+
 });
 
 app.get('/', (req: any, res: any) => {
