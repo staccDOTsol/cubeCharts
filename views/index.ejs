@@ -78,7 +78,7 @@ var first =true
                 let tops = jsondata.topOfBooks.tops 
                 for (var top of tops){
                             if (asks[top.marketId] == undefined){
-                  
+                  conole.log(top.marketId)
                         bids[top.marketId]=([[Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.bidPrice)]])
                         asks[top.marketId]=([[Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.askPrice)]])
 
@@ -153,7 +153,7 @@ var first =true
                         bids[top.marketId].push([Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.bidPrice)])
                         asks[top.marketId].push([Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.askPrice)])
                     }
-                    if (bids[top.marketId].length > 2 && first[i] == undefined){
+                    if (bids[top.marketId].length > 0 && first[i] == undefined){
                         first[i] = false   
                       
 console.log('container'+i.toString())
