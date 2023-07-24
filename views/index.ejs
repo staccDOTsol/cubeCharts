@@ -74,7 +74,7 @@ let options = []
         var quoinexBids = []
         setInterval(function() {
             //chart = Highcharts.stockChart('container', options);
-            $.getJSON('http://localhost:8080/update?name=test', function(jsondata) {
+            $.getJSON('http://localhost:3000/update?name=test', function(jsondata) {
                 let tops = jsondata.topOfBooks.tops 
                 for (var i = 0; i < tops.length; i++){
                     try {
