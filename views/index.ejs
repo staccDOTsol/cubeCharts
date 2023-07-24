@@ -88,7 +88,7 @@ var first =true
                         asks[top.marketId]=([[Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.askPrice)]])
 
 
-                        options[(i)] =     {    rangeSelector: {
+                        options[parseInt(top.marketId)-1] =     {    rangeSelector: {
             buttons: [{
                 count: 1,
                 type: 'minute',
@@ -143,11 +143,11 @@ var first =true
         },
         series: [{
                 name: 'Bids',
-  data: bids[(i+1).toString()],
+  data: bids[parseInt(top.marketId)-1],
                 color: '#FFFF00'
             },{
                 name: 'Asks',
-  data: asks[(i+1).toString()],
+  data: asks[parseInt(top.marketId)-1],
                 color: '#00FF00'
             }
         ]
