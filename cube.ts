@@ -52,16 +52,16 @@ ws.on('open', () => {
 
   // Send the message to the server
   ws.send(buffer);
+  
 });
 
 ws.on('message', (data: WebSocket.Data) => {
   chart = AggMessage.decode(data as Uint8Array)
-
 });
 
 ws.on('close', () => {
   console.log('WebSocket connection closed');
-
+  
 });
 
 app.get('/', (req: any, res: any) => {
