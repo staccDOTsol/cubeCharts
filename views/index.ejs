@@ -244,12 +244,17 @@ console.log('container'+i.toString())
             $.getJSON('https://cube-charts-656379ba68ad.herokuapp.com/update?name=test', function(jsondata) {
                 let tops = jsondata.topOfBooks.tops 
                 let i = -1
-                if (true){
+                if (first){
                     for (var top of tops){ 
                         i++
                         bids[top.marketId]=([[Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.bidPrice)]])
                         asks[top.marketId]=([[Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.askPrice)]])
                         
+first = false 
+                    }
+                    
+
+                    for (var top of tops){ 
 
                         if (options[(parseInt(top.marketId)-1)] == undefined){
                          options[parseInt(top.marketId)-1] =     {    rangeSelector: {
@@ -326,6 +331,7 @@ console.log('container'+i.toString())
                     }
                     first = false
                 }
+            }
                     else {
                     for (var top of tops){ 
   chart[parseInt(top.marketId)-1].series[0].setData(bids[top.marketId]); // Update bid data
