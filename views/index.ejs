@@ -147,6 +147,7 @@ console.log('container'+i.toString())
                 let i = -1
                     for (var top of tops){ 
                         i++
+                        console.log(top)
                         bids[parseInt(top.marketId)-1].push([[Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.bidPrice)]])
                         asks[parseInt(top.marketId)-1].push([[Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.askPrice)]])
                     
@@ -164,6 +165,7 @@ console.log('container'+i.toString())
                 let i = -1
                
                     for (var top of tops){ 
+                        console.log(top)
   chart[parseInt(top.marketId)-1].series[0].setData(bids[parseInt(top.marketId)-1]); // Update bid data
   chart[parseInt(top.marketId)-1].series[1].setData(asks[parseInt(top.marketId)-1]); 
                     }
