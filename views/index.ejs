@@ -77,7 +77,6 @@ var first =true
                 let tops = jsondata.topOfBooks.tops 
                 let i = -1
                 if (first){
-                    first = false
                     for (var top of tops){ 
                         i++
                         bids[top.marketId]=([[Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.bidPrice)]])
@@ -156,6 +155,7 @@ console.log('container'+i.toString())
          chart[parseInt(top.marketId)-1]=( Highcharts.stockChart('container'+(parseFloat(top.marketId)-1).toString(), options[parseFloat(top.marketId)-1]))
 
                     }
+                    first = false
                 }
                     else {
                     for (var top of tops){ 
