@@ -148,14 +148,12 @@ let options = []
         ]
                         }
         
-  chart[parseInt(tops[i].marketId)-1].series[0].setData(bids[tops[i].marketId]); // Update bid data
-  chart[parseInt(tops[i].marketId)-1].series[1].setData(asks[tops[i].marketId]); 
                     }
                     else {
                         bids[tops[i].marketId].push([Math.floor(parseFloat(tops[i].transactTime) / 1000000), parseFloat(tops[i].bidPrice)])
                         asks[tops[i].marketId].push([Math.floor(parseFloat(tops[i].transactTime) / 1000000), parseFloat(tops[i].askPrice)])
                     }
-                    if (bids[tops[i].marketId].length > 13){
+                    if (bids[tops[i].marketId].length > 2){
                       
 console.log('container'+i.toString())
          chart[parseInt(tops[i].marketId)-1]=( Highcharts.stockChart('container'+i.toString(), options[i]))
