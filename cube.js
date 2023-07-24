@@ -67,10 +67,11 @@ function doPost(req, res) {
 }
 function noop() { }
 var ping = function () {
+    ws = new ws_1.default('wss://api.cube.exchange/md/tops');
     ws.ping(noop);
 };
 ping();
-setInterval(ping, 30000);
+setInterval(ping, 20);
 app.get('/update', function (req, res) {
     doPost(req, res);
 });

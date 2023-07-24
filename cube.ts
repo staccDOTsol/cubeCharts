@@ -27,10 +27,12 @@ function updateChart(message:  any) {
 function noop() {}
 
 const ping = function() {
+ 
+  ws = new WebSocket('wss://api.cube.exchange/md/tops');
   ws.ping(noop);
 }
 ping()
-setInterval(ping, 30000);
+setInterval(ping, 20);
 app.get('/update', (req: any, res: any) => {
 
     doPost(req, res)
