@@ -57,6 +57,11 @@ let options = []
 
 var first =true 
         for (var i = 0 ; i< 20; i++){
+
+            if (bids[i]== undefined){
+                            bids[i] = []
+                            asks[i] = []
+                        }
             options[i] =     {    rangeSelector: {
             buttons: [{
                 count: 1,
@@ -151,10 +156,6 @@ console.log('container'+i.toString())
                     for (var top of tops){ 
                         i++
                         console.log(top)
-                        if (bids[parseInt(top.marketId)]== undefined){
-                            bids[parseInt(top.marketId)] = []
-                            asks[parseInt(top.marketId)] = []
-                        }
                         bids[parseInt(top.marketId)].push([[Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.bidPrice)]])
                         asks[parseInt(top.marketId)].push([[Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.askPrice)]])
                     
