@@ -76,11 +76,11 @@ var first =true
             //chart = Highcharts.stockChart('container', options);
             $.getJSON('https://cube-charts-656379ba68ad.herokuapp.com/update?name=test', function(jsondata) {
                 let tops = jsondata.topOfBooks.tops 
-                for (var i = 0; i < tops.length; i++){
-                            if (asks[(i+1).toString()] == undefined){
+                for (var top of tops){
+                            if (asks[top.marketId] == undefined){
                   
-                        bids[tops[i].marketId]=([[Math.floor(parseFloat(tops[i].transactTime) / 1000000), parseFloat(tops[i].bidPrice)]])
-                        asks[tops[i].marketId]=([[Math.floor(parseFloat(tops[i].transactTime) / 1000000), parseFloat(tops[i].askPrice)]])
+                        bids[top.marketId]=([[Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.bidPrice)]])
+                        asks[top.marketId]=([[Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.askPrice)]])
 
 
                         options[i] =     {    rangeSelector: {
@@ -150,18 +150,18 @@ var first =true
         
                     }
                     else {
-                        bids[tops[i].marketId].push([Math.floor(parseFloat(tops[i].transactTime) / 1000000), parseFloat(tops[i].bidPrice)])
-                        asks[tops[i].marketId].push([Math.floor(parseFloat(tops[i].transactTime) / 1000000), parseFloat(tops[i].askPrice)])
+                        bids[top.marketId].push([Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.bidPrice)])
+                        asks[top.marketId].push([Math.floor(parseFloat(top.transactTime) / 1000000), parseFloat(top.askPrice)])
                     }
-                    if (bids[tops[i].marketId].length > 2 && first[i] == undefined){
+                    if (bids[top.marketId].length > 2 && first[i] == undefined){
                         first[i] = false   
                       
 console.log('container'+i.toString())
-         chart[parseInt(tops[i].marketId)-1]=( Highcharts.stockChart('container'+i.toString(), options[i]))
+         chart[parseInt(top.marketId)-1]=( Highcharts.stockChart('container'+i.toString(), options[i]))
 
                     }
-  chart[parseInt(tops[i].marketId)-1].series[0].setData(bids[tops[i].marketId]); // Update bid data
-  chart[parseInt(tops[i].marketId)-1].series[1].setData(asks[tops[i].marketId]); 
+  chart[parseInt(top.marketId)-1].series[0].setData(bids[top.marketId]); // Update bid data
+  chart[parseInt(top.marketId)-1].series[1].setData(asks[top.marketId]); 
                
                 }
                 console.log(asks)
