@@ -26,24 +26,6 @@ function updateChart(message:  any) {
 
 function noop() {}
 
-const ping = function() {
- 
-try {  ws.ping(noop);
- }catch(err){
-
- }
-}
-ping()
-setInterval(async function(){
-  try {
-
-  ws = new WebSocket('wss://api.cube.exchange/md/tops');
-  
-  } catch (err){
-
-  }
-}, 1999)
-setInterval(ping, 2000);
 app.get('/update', (req: any, res: any) => {
 
     doPost(req, res)

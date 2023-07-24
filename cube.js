@@ -66,27 +66,6 @@ function doPost(req, res) {
     });
 }
 function noop() { }
-var ping = function () {
-    try {
-        ws.ping(noop);
-    }
-    catch (err) {
-    }
-};
-ping();
-setInterval(function () {
-    return __awaiter(this, void 0, void 0, function () {
-        return __generator(this, function (_a) {
-            try {
-                ws = new ws_1.default('wss://api.cube.exchange/md/tops');
-            }
-            catch (err) {
-            }
-            return [2 /*return*/];
-        });
-    });
-}, 1999);
-setInterval(ping, 2000);
 app.get('/update', function (req, res) {
     doPost(req, res);
 });
