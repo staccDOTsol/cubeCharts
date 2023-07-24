@@ -94,6 +94,26 @@ ws.on('message', function (data) {
 });
 ws.on('close', function () {
     console.log('WebSocket connection closed');
+    // Create a new MdMessage instance
+    var message = AggMessage.create({
+        // Set the levels property to an array of AggMessage_Level instances
+        // @ts-ignore
+        levels: [
+            {
+                price: BigInt(100),
+                quantity: BigInt(10)
+            },
+            {
+                price: BigInt(100),
+                quantity: BigInt(20)
+            }
+        ],
+        chunk: 1,
+        numChunks: 1
+    });
+    var buffer = AggMessage.encode(AggMessage.create(message)).finish(); // Encode your message to a buffer
+    // Send the message to the server
+    ws.send(buffer);
 });
 app.get('/', function (req, res) {
     res.render('index');
